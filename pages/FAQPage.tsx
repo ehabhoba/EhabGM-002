@@ -5,20 +5,20 @@ import PageMetadata from '../components/PageMetadata';
 
 const AccordionItem: React.FC<{ item: { question: string; answer: string; }, isOpen: boolean, onClick: () => void }> = ({ item, isOpen, onClick }) => {
   return (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-gray-200 dark:border-gray-700">
       <button
-        className="flex justify-between items-center w-full py-5 text-right font-semibold text-lg text-gray-800"
+        className="flex justify-between items-center w-full py-5 text-right font-semibold text-lg text-gray-800 dark:text-gray-100"
         onClick={onClick}
         aria-expanded={isOpen}
       >
         <span>{item.question}</span>
-        {isOpen ? <MinusIcon className="h-6 w-6 text-indigo-600" /> : <PlusIcon className="h-6 w-6 text-gray-500" />}
+        {isOpen ? <MinusIcon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" /> : <PlusIcon className="h-6 w-6 text-gray-500 dark:text-gray-400" />}
       </button>
       <div
         className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
       >
           <div className="overflow-hidden">
-            <p className="pb-5 pr-4 text-gray-600">
+            <p className="pb-5 pr-4 text-gray-600 dark:text-gray-300">
             {item.answer}
             </p>
           </div>
@@ -35,28 +35,42 @@ const FAQPage: React.FC = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQ_ITEMS.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  };
+
   return (
     <>
     <PageMetadata 
       title={FAQ_PAGE_META.title}
       description={FAQ_PAGE_META.description}
       keywords={FAQ_PAGE_META.keywords}
+      schema={faqSchema}
     />
     <div className="animate-fade-in">
       {/* Page Header */}
-      <section className="bg-white py-12">
+      <section className="bg-white dark:bg-gray-900 py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">الأسئلة الشائعة</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">الأسئلة الشائعة</h1>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300">
             أجوبة لأكثر الأسئلة التي تصلنا. إذا لم تجد سؤالك، لا تتردد في التواصل معنا مباشرة.
           </p>
         </div>
       </section>
 
       {/* FAQ Accordion */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+          <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg">
             {FAQ_ITEMS.map((item, index) => (
               <AccordionItem
                 key={index}

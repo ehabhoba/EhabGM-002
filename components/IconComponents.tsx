@@ -1,6 +1,6 @@
 import React from 'react';
 
-const iconBaseClass = "h-8 w-8 text-indigo-500";
+const iconBaseClass = "h-8 w-8 text-indigo-500 dark:text-indigo-400";
 const smallIconBaseClass = "h-6 w-6";
 
 export const PaletteIcon: React.FC<{className?: string}> = ({className}) => (
@@ -59,7 +59,7 @@ export const ThreadsIcon: React.FC = () => (
 );
 
 export const CheckCircleIcon: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-indigo-600">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-indigo-600 dark:text-indigo-500">
     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
   </svg>
 );
@@ -116,7 +116,7 @@ export const MinusIcon: React.FC<{className?: string}> = ({className}) => (
 );
 
 export const SearchIcon: React.FC<{className?: string}> = ({className}) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || iconBaseClass}>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || smallIconBaseClass}>
     <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 );
@@ -174,4 +174,50 @@ export const BlueskyIcon: React.FC<{className?: string}> = ({className}) => (
 
 export const TumblrIcon: React.FC<{className?: string}> = ({className}) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className || smallIconBaseClass}><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.468H14.9V9.747h5.43v4.257h-5.43v4.403c0 2.243 1.401 3.443 3.245 3.443.502 0 1.156-.12 1.512-.294l1.323 3.93c-.633.294-1.92.5-3.345.5z"></path></svg>
+);
+
+export const SunIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || smallIconBaseClass}>
+    <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.93 19.07 1.41-1.41"/><path d="m17.66 6.34 1.41-1.41"/>
+  </svg>
+);
+
+export const MoonIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || smallIconBaseClass}>
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+  </svg>
+);
+
+export const SparklesIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || iconBaseClass}>
+    <path d="m12 3-1.9 5.8-5.8 1.9 5.8 1.9L12 21l1.9-5.8 5.8-1.9-5.8-1.9L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+);
+
+export const WhatsAppIcon: React.FC<{className?: string}> = ({className}) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className || smallIconBaseClass}>
+        <path d="M16.75 13.96c.25.13.41.2.46.3.06.11.04.61-.21 1.16-.24.55-1.51 1.14-2.15 1.18-.56.04-1.13.03-1.56-.13-.34-.13-1.4-1.04-2.66-2.29-1.5-1.5-2.83-2.9-3.25-3.83-.42-.93-.06-1.4.31-1.8.33-.36.65-.45.85-.45.2-.01.42.01.61.02.2.01.36.01.53.28.17.27.63 1.56.68 1.67.05.11.06.24.01.38-.06.13-.13.24-.26.39-.13.15-.24.24-.32.32-.08.08-.18.18-.08.33.1.15.45.74.96 1.24 1.18 1.18 1.93 1.58 2.18 1.69.25.11.37.09.49-.03.12-.12.52-.57.67-.76.15-.19.3-.2.46-.12zM12 2a10 10 0 1 0 10 10 10 10 0 0 0-10-10z"/>
+    </svg>
+);
+
+export const SmartphoneIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || iconBaseClass}>
+    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+  </svg>
+);
+
+export const ShieldCheckIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || iconBaseClass}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+    <path d="m9 12 2 2 4-4"></path>
+  </svg>
+);
+
+export const GaugeIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || iconBaseClass}>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0"></path>
+    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0-2 0"></path>
+    <path d="M13.41 10.59 16 8"></path>
+    <path d="M12 21a9 9 0 0 0 0-18v18"></path>
+  </svg>
 );

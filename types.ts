@@ -1,3 +1,4 @@
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 export interface Service {
   icon: React.ReactNode;
@@ -8,13 +9,15 @@ export interface Service {
 }
 
 export interface PortfolioItem {
-  id: number;
+  id: string; // uuid from Supabase
   title: string;
-  category: string;
-  imageUrl: string;
-  description: string;
-  stats: { value: string; label: string }[];
-  tags: string[];
+  description:string;
+  image_url: string;
+  created_at: string;
+  category?: string;
+  stats?: { value: string; label: string }[];
+  tags?: string[];
+  serviceSlug?: string; // Links portfolio item to a service page
 }
 
 export interface SocialLink {
@@ -75,6 +78,28 @@ export interface PageContent {
     title: string;
     list: string[];
   };
+  whyChooseUs?: {
+      title: string;
+      points: {
+          icon: React.ReactNode;
+          title: string;
+          description: string;
+      }[];
+  };
+  process?: {
+      title: string;
+      steps: ProcessStep[];
+  };
+  faq?: {
+      title: string;
+      items: {
+          question: string;
+          answer: string;
+      }[];
+  };
+  relatedPortfolioSlug?: string;
+  relatedServicesSlugs?: string[];
+  relatedPostsSlugs?: string[];
   cta: {
     title: string;
     buttonText: string;
@@ -99,6 +124,7 @@ export interface PricingPackage {
   isPopular?: boolean;
   ctaText: string;
   category: 'monthly' | 'campaign' | 'single';
+  whatsappLink?: string;
 }
 
 export interface GraphicPriceItem {
@@ -108,16 +134,51 @@ export interface GraphicPriceItem {
 }
 
 export interface BlogPost {
-  slug: string;
+  id: string; // uuid from Supabase
   title: string;
-  author: string;
-  date: string;
-  heroImage: string;
-  excerpt: string;
   content: string;
-  meta: {
+  author_id: string | null;
+  created_at: string;
+  is_published: boolean;
+  slug?: string; 
+  excerpt?: string;
+  heroImage?: string;
+  author?: string;
+  date?: string;
+  meta?: {
     title: string;
     description: string;
     keywords: string;
   };
+  relatedServicesSlugs?: string[]; // Links blog post to service pages
+}
+
+export interface SearchResult {
+  title: string;
+  excerpt: string;
+  link: string;
+  type: 'خدمة' | 'مقال';
+}
+
+// Auth Types
+export interface UserProfile {
+    id: string;
+    name: string;
+    role: 'admin' | 'client';
+}
+
+export interface AuthContextType {
+    user: SupabaseUser | null;
+    profile: UserProfile | null;
+    loading: boolean;
+    signOut: () => Promise<void>;
+}
+
+export interface Ticket {
+    id: string; // uuid
+    user_id: string | null;
+    subject: string;
+    description: string;
+    status: string;
+    created_at: string;
 }

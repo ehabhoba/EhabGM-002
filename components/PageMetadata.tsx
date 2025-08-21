@@ -4,9 +4,10 @@ interface PageMetadataProps {
   title: string;
   description: string;
   keywords?: string;
+  schema?: object | object[]; // Allow single object or array
 }
 
-const PageMetadata: React.FC<PageMetadataProps> = ({ title, description, keywords }) => {
+const PageMetadata: React.FC<PageMetadataProps> = ({ title, description, keywords, schema }) => {
   useEffect(() => {
     // Set document title
     const fullTitle = `${title}`;
@@ -34,17 +35,31 @@ const PageMetadata: React.FC<PageMetadataProps> = ({ title, description, keyword
     setMetaTag('property', 'og:description', description);
     setMetaTag('property', 'og:type', 'website');
     // You can add a default image for sharing
-    // setMetaTag('property', 'og:image', 'https://ehabgm.online/default-share-image.jpg');
+    // setMetaTag('property', 'og:image', 'https://ehabonlineservice.online/default-share-image.jpg');
 
     // Twitter Card
     setMetaTag('name', 'twitter:card', 'summary_large_image');
     setMetaTag('name', 'twitter:title', fullTitle);
     setMetaTag('name', 'twitter:description', description);
     // You can add a default image for Twitter sharing
-    // setMetaTag('name', 'twitter:image', 'https://ehabgm.online/default-share-image.jpg');
+    // setMetaTag('name', 'twitter:image', 'https://ehabonlineservice.online/default-share-image.jpg');
 
+    // Handle JSON-LD Schema
+    let schemaScript = document.getElementById('json-ld-schema') as HTMLScriptElement | null;
+    if (schema) {
+      if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = 'json-ld-schema';
+        schemaScript.type = 'application/ld+json';
+        document.head.appendChild(schemaScript);
+      }
+      schemaScript.innerHTML = JSON.stringify(schema, null, 2);
+    } else if (schemaScript) {
+      // Clean up if no schema is provided on a subsequent render
+      schemaScript.remove();
+    }
 
-  }, [title, description, keywords]);
+  }, [title, description, keywords, schema]);
 
   return null; // This component does not render anything
 };

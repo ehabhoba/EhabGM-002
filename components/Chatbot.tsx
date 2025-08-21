@@ -1,7 +1,9 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { BotMessageSquareIcon, SendIcon, XIcon, MessageCircleIcon } from './IconComponents';
 import type { ChatMessage } from '../types';
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
+import { useTheme } from '../contexts/ThemeContext';
 
 // Moved system instruction outside the component for clarity and performance.
 const systemInstruction = `
@@ -45,6 +47,7 @@ const Chatbot: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<Chat | null>(null);
+  const { theme } = useTheme();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -126,59 +129,61 @@ const Chatbot: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-80 h-[28rem] bg-white rounded-lg shadow-2xl flex flex-col z-50 animate-fade-in-up">
-          <header className="bg-indigo-600 text-white p-4 flex items-center justify-between rounded-t-lg">
-            <div className="flex items-center">
-              <BotMessageSquareIcon />
-              <h3 className="text-lg font-semibold ml-2">المساعد الذكي جيمي</h3>
-            </div>
-            <button onClick={() => setIsOpen(false)} aria-label="Close chat"><XIcon /></button>
-          </header>
-
-          <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
-            <div className="space-y-4">
-              {messages.map((msg) => (
-                <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div
-                    className={`max-w-xs py-2 px-4 rounded-2xl ${
-                      msg.sender === 'user' ? 'bg-indigo-500 text-white rounded-br-none' : 'bg-gray-200 text-gray-800 rounded-bl-none'
-                    }`}
-                  >
-                    <p className="text-sm">{msg.text}</p>
-                  </div>
+        <div className={`fixed bottom-24 right-6 w-80 h-[28rem] rounded-lg shadow-2xl flex flex-col z-50 animate-fade-in-up ${theme === 'dark' ? 'dark' : ''}`}>
+           <div className="bg-white dark:bg-gray-800 rounded-lg flex flex-col h-full">
+              <header className="bg-indigo-600 text-white p-4 flex items-center justify-between rounded-t-lg">
+                <div className="flex items-center">
+                  <BotMessageSquareIcon />
+                  <h3 className="text-lg font-semibold ml-2">المساعد الذكي جيمي</h3>
                 </div>
-              ))}
-               {isLoading && (
-                 <div className="flex justify-start">
-                    <div className="bg-gray-200 text-gray-800 rounded-2xl rounded-bl-none p-2">
-                        <div className="flex items-center space-x-2">
-                            <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                            <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                            <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce"></span>
+                <button onClick={() => setIsOpen(false)} aria-label="Close chat"><XIcon /></button>
+              </header>
+
+              <div className="flex-1 p-4 overflow-y-auto bg-gray-50 dark:bg-gray-900">
+                <div className="space-y-4">
+                  {messages.map((msg) => (
+                    <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div
+                        className={`max-w-xs py-2 px-4 rounded-2xl ${
+                          msg.sender === 'user' ? 'bg-indigo-500 text-white rounded-br-none' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-none'
+                        }`}
+                      >
+                        <p className="text-sm">{msg.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                   {isLoading && (
+                     <div className="flex justify-start">
+                        <div className="bg-gray-200 dark:bg-gray-700 rounded-2xl rounded-bl-none p-2">
+                            <div className="flex items-center space-x-2">
+                                <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                <span className="h-2 w-2 bg-gray-500 rounded-full animate-bounce"></span>
+                            </div>
                         </div>
                     </div>
+                  )}
+                  <div ref={messagesEndRef} />
                 </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-          </div>
+              </div>
 
-          <div className="p-4 border-t border-gray-200 bg-white rounded-b-lg">
-            <div className="flex items-center">
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="اسأل أي حاجة..."
-                className="flex-1 py-2 px-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                disabled={isLoading}
-              />
-              <button onClick={handleSendMessage} disabled={isLoading} className="mr-3 p-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 disabled:bg-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
-                <SendIcon />
-              </button>
-            </div>
-          </div>
+              <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-b-lg">
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                    placeholder="اسأل أي حاجة..."
+                    className="flex-1 py-2 px-3 border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                    disabled={isLoading}
+                  />
+                  <button onClick={handleSendMessage} disabled={isLoading} className="mr-3 p-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 disabled:bg-indigo-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
+                    <SendIcon />
+                  </button>
+                </div>
+              </div>
+           </div>
         </div>
       )}
     </>
