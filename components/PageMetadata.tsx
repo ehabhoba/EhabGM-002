@@ -3,9 +3,10 @@ import React, { useEffect } from 'react';
 interface PageMetadataProps {
   title: string;
   description: string;
+  keywords?: string;
 }
 
-const PageMetadata: React.FC<PageMetadataProps> = ({ title, description }) => {
+const PageMetadata: React.FC<PageMetadataProps> = ({ title, description, keywords }) => {
   useEffect(() => {
     // Set document title
     const fullTitle = `${title}`;
@@ -24,6 +25,9 @@ const PageMetadata: React.FC<PageMetadataProps> = ({ title, description }) => {
     
     // Standard Meta Tags
     setMetaTag('name', 'description', description);
+    if (keywords) {
+        setMetaTag('name', 'keywords', keywords);
+    }
     
     // Open Graph (Facebook, etc.)
     setMetaTag('property', 'og:title', fullTitle);
@@ -40,7 +44,7 @@ const PageMetadata: React.FC<PageMetadataProps> = ({ title, description }) => {
     // setMetaTag('name', 'twitter:image', 'https://ehabgm.online/default-share-image.jpg');
 
 
-  }, [title, description]);
+  }, [title, description, keywords]);
 
   return null; // This component does not render anything
 };

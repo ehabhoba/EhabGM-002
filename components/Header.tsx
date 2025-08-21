@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { NAV_CONFIG, CONTACT_LINK } from '../constants';
+import { NAV_CONFIG, CONTACT_LINK, LOGO_URL } from '../constants';
 import { MenuIcon, XIcon } from './IconComponents';
 import { NavItem } from '../types';
 
@@ -106,8 +106,8 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-indigo-600">
-              EhabGM<span className="text-gray-700">.</span>
+            <Link to="/">
+              <img src={LOGO_URL} alt="EhabGM Online Services Logo" className="h-14 w-auto" />
             </Link>
           </div>
           <div className="hidden md:flex md:items-center">

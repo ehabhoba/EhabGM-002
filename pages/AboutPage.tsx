@@ -1,24 +1,25 @@
-
 import React from 'react';
-import { VALUES, PROCESS_STEPS } from '../constants';
+import { VALUES, PROCESS_STEPS, PAGES_DATA } from '../constants';
 import { Link } from 'react-router-dom';
 import PageMetadata from '../components/PageMetadata';
 
 const AboutPage: React.FC = () => {
+  const pageContent = PAGES_DATA['our-story'];
 
   return (
     <>
     <PageMetadata 
-      title="من نحن | قصة وكالة EhabGM للتسويق الرقمي"
-      description="اكتشف قصة EhabGM، وكالة التسويق الرقمي الرائدة في حلوان. تعرف على رؤيتنا، رسالتنا، وقيمنا التي تدفعنا لمساعدة الشركات على تحقيق النجاح."
+      title={pageContent.meta.title}
+      description={pageContent.meta.description}
+      keywords={pageContent.meta.keywords}
     />
     <div className="animate-fade-in">
       {/* Page Header */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">قصتنا</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">{pageContent.title}</h1>
           <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
-            ehabgm – شغفنا هو نجاحك. بدأت رحلتنا من حلوان لمساعدة الشركات على تحقيق نمو حقيقي وملموس عبر الإنترنت.
+            حلول متكاملة في المجالات الرقمية. الخيار الأمثل للأفراد والشركات الباحثين عن خدمات إبداعية احترافية بأسعار تنافسية ودعم متواصل.
           </p>
         </div>
       </section>
@@ -27,20 +28,23 @@ const AboutPage: React.FC = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="text-center">
               <img 
-                src="https://picsum.photos/seed/about/600/700" 
-                alt="فريق عمل ehabgm" 
-                className="rounded-lg shadow-2xl w-full h-auto object-cover"
+                src={pageContent.heroImage}
+                alt="إيهاب محمد - مؤسس وكالة EhabGM" 
+                className="rounded-lg shadow-2xl w-full max-w-sm mx-auto h-auto object-cover"
               />
+              <h3 className="text-2xl font-bold text-gray-900 mt-6">إيهاب محمد</h3>
+              <p className="text-indigo-600 font-semibold">مؤسس | مصمم جرافيك ومتخصص تسويق رقمي</p>
+              <p className="text-gray-500 text-sm mt-1">القاهرة، مصر</p>
             </div>
             <div>
               <h2 className="text-3xl font-bold text-gray-900">من فكرة إلى وكالة رائدة</h2>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                <span className="font-bold text-indigo-600">ehabgm</span> هي وكالة تسويق رقمي متكاملة أسسها إيهاب محمد، بخبرة تمتد لأكثر من 8 سنوات. بدأت EhabGM بشغف لمساعدة الشركات الصغيرة على النجاح في العالم الرقمي. اليوم، نحن وكالة متكاملة تفخر بخدمة أكثر من 100 عميل في مصر والوطن العربي، مع التزام ثابت بالجودة والابتكار.
+                <span className="font-bold text-indigo-600">EhabGM</span> هي منصة شاملة تقدم حلولاً متكاملة في المجالات الرقمية. بدأت EhabGM بشغف لمساعدة الشركات الصغيرة على النجاح في العالم الرقمي، ونحن نؤمن بأن النجاح يتطلب شريكًا يفهم السوق ويقدم حلولاً إبداعية تليق بطموحك.
               </p>
               <p className="mt-4 text-gray-600 leading-relaxed">
-                نحن نؤمن بأن النجاح في العصر الرقمي يتطلب شريكًا يفهم السوق ويقدم حلولاً إبداعية تليق بطموحك. نحن هنا لنكون هذا الشريك، حيث نستطيع تحويل فكرتك إلى مشروع ناجح بخطط تسويق ذكية تعتمد على البيانات والإبداع.
+                نحن هنا لنكون شريك نجاحك ودليل تحقيق أهدافك، من خلال خدمات متكاملة تضمن ظهور علامتك التجارية بأفضل صورة وأقل تكلفة.
               </p>
                <div className="mt-8">
                 <Link to="/page/vision-mission" className="font-semibold text-indigo-600 hover:text-indigo-800">

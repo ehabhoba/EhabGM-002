@@ -1,6 +1,5 @@
-
 import React, { useState, useMemo } from 'react';
-import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES } from '../constants';
+import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES, PORTFOLIO_PAGE_META } from '../constants';
 import { XIcon } from '../components/IconComponents';
 import { PortfolioItem } from '../types';
 import PageMetadata from '../components/PageMetadata';
@@ -19,8 +18,9 @@ const PortfolioPage: React.FC = () => {
   return (
     <>
     <PageMetadata 
-      title="معرض الأعمال | مشاريعنا السابقة في التسويق والتصميم"
-      description="تصفح أعمالنا المميزة في التسويق الرقمي، تطوير المواقع، والمتاجر الإلكترونية. اكتشف كيف ساعدنا عملاءنا على تحقيق نتائج استثنائية."
+      title={PORTFOLIO_PAGE_META.title}
+      description={PORTFOLIO_PAGE_META.description}
+      keywords={PORTFOLIO_PAGE_META.keywords}
     />
     <div className="animate-fade-in">
       {/* Page Header */}

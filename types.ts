@@ -23,6 +23,12 @@ export interface SocialLink {
   url: string;
 }
 
+export interface WebsiteLink {
+  name: string;
+  icon: React.ReactNode;
+  url: string;
+}
+
 export interface ChatMessage {
     id: number;
     text: string;
@@ -87,9 +93,31 @@ export interface PageContent {
 export interface PricingPackage {
   title: string;
   price: string;
-  priceDetails: string;
+  priceDetails?: string;
   description: string;
   features: string[];
   isPopular?: boolean;
   ctaText: string;
+  category: 'monthly' | 'campaign' | 'single';
+}
+
+export interface GraphicPriceItem {
+  service: string;
+  price: string;
+  details: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  author: string;
+  date: string;
+  heroImage: string;
+  excerpt: string;
+  content: string;
+  meta: {
+    title: string;
+    description: string;
+    keywords: string;
+  };
 }

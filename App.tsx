@@ -11,6 +11,8 @@ import ContactPage from './pages/ContactPage';
 import FAQPage from './pages/FAQPage';
 import ContentPage from './pages/ContentPage';
 import PricingPage from './pages/PricingPage';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 
 const App: React.FC = () => {
   return (
@@ -25,6 +27,8 @@ const App: React.FC = () => {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/page/:slug" element={<ContentPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
         </Routes>
       </main>
       <Footer />

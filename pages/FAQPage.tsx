@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { FAQ_ITEMS } from '../constants';
+import { FAQ_ITEMS, FAQ_PAGE_META } from '../constants';
 import { PlusIcon, MinusIcon } from '../components/IconComponents';
 import PageMetadata from '../components/PageMetadata';
 
@@ -39,8 +38,9 @@ const FAQPage: React.FC = () => {
   return (
     <>
     <PageMetadata 
-      title="الأسئلة الشائعة | كل ما تريد معرفته عن خدماتنا"
-      description="أجوبة لأكثر الأسئلة التي تصلنا حول طرق الدفع، مدة تنفيذ المشاريع، سياسة التعديلات، وغيرها. إذا لم تجد سؤالك، لا تتردد في التواصل معنا."
+      title={FAQ_PAGE_META.title}
+      description={FAQ_PAGE_META.description}
+      keywords={FAQ_PAGE_META.keywords}
     />
     <div className="animate-fade-in">
       {/* Page Header */}

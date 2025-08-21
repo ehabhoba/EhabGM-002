@@ -1,16 +1,18 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SERVICES, PORTFOLIO_ITEMS, TRUST_POINTS, TESTIMONIALS, STATISTICS } from '../constants';
-import { CheckCircleIcon } from '../components/IconComponents';
+import { SERVICES, PORTFOLIO_ITEMS, TRUST_POINTS, TESTIMONIALS, STATISTICS, BLOG_POSTS, HOME_PAGE_META } from '../constants';
+import { CheckCircleIcon, CalendarIcon, UserIcon } from '../components/IconComponents';
 import PageMetadata from '../components/PageMetadata';
 
 const HomePage: React.FC = () => {
+  const latestPosts = BLOG_POSTS.slice(0, 3);
+
   return (
     <>
     <PageMetadata 
-      title="EhabGM | وكالة تسويق رقمي وتصميم في حلوان"
-      description="نضاعف مبيعاتك في 90 يوم أو تسترد أموالك. وكالة تسويق رقمي متكاملة في حلوان، القاهرة. نقدم خدمات تصميم الجرافيك، إدارة السوشيال ميديا، والإعلانات الممولة."
+      title={HOME_PAGE_META.title}
+      description={HOME_PAGE_META.description}
+      keywords={HOME_PAGE_META.keywords}
     />
     <div className="animate-fade-in">
       {/* Hero Section */}
@@ -145,6 +147,46 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Blog Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">أحدث المقالات</h2>
+                <p className="mt-4 text-lg text-gray-600">نصائح وأفكار من خبرائنا لمساعدتك على النجاح في العالم الرقمي.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {latestPosts.map((post) => (
+                    <div key={post.slug} className="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <Link to={`/blog/${post.slug}`}>
+                            <img src={post.heroImage} alt={post.title} className="w-full h-56 object-cover hover:opacity-90 transition-opacity" />
+                        </Link>
+                        <div className="p-6 flex flex-col flex-grow">
+                            <h3 className="text-xl font-bold text-gray-900 hover:text-indigo-600 transition-colors">
+                                <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                            </h3>
+                            <p className="mt-2 text-gray-600 flex-grow">{post.excerpt}</p>
+                            <div className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-between text-sm text-gray-500">
+                                <div className="flex items-center">
+                                    <UserIcon className="h-4 w-4 mr-1.5" />
+                                    <span>{post.author}</span>
+                                </div>
+                                <div className="flex items-center">
+                                    <CalendarIcon className="h-4 w-4 mr-1.5" />
+                                    <span>{post.date}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+             <div className="text-center mt-12">
+                <Link to="/blog" className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-transform transform hover:scale-105">
+                    اقرأ كل المقالات
+                </Link>
+            </div>
+        </div>
+    </section>
 
       {/* Final CTA */}
        <section className="bg-indigo-700">

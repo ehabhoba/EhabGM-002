@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const iconBaseClass = "h-8 w-8 text-indigo-500";
@@ -138,4 +137,41 @@ export const FilmIcon: React.FC<{className?: string}> = ({className}) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || iconBaseClass}>
         <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" /><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5" />
     </svg>
+);
+
+export const CalendarIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || smallIconBaseClass}>
+    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+    <line x1="16" x2="16" y1="2" y2="6"/>
+    <line x1="8" x2="8" y1="2" y2="6"/>
+    <line x1="3" x2="21" y1="10" y2="10"/>
+  </svg>
+);
+
+export const UserIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || smallIconBaseClass}>
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
+  </svg>
+);
+
+export const StoreIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || smallIconBaseClass}>
+    <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7.88V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7.88"/></svg>
+);
+
+export const WordpressIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className || smallIconBaseClass}><path d="M12 12.2c-2.12 0-3.32.96-3.32 2.36 0 1.1.84 1.8 2.08 1.8 1.48 0 2.2-.92 2.2-2.12 0-.32-.12-.6-.36-.84zm-6.28.32c0-2.68 2.32-4.8 5.4-4.8 2.88 0 4.28 1.48 4.28 3.32 0 1.16-.6 2.04-1.4 2.52.88.44 1.64 1.4 1.64 2.64 0 2.4-2.2 4.04-5.52 4.04-3.44 0-5.8-1.8-5.8-4.72 0-.96.32-1.84.88-2.48zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.48 14.16c-1 .8-2.32 1.24-3.8 1.24a5.25 5.25 0 0 1-5.27-5.28c0-2.92 2.35-5.28 5.27-5.28 2.92 0 5.28 2.36 5.28 5.28 0 2-.96 3.4-2.48 4.04z"/><path d="M9.83 11.2c0-1.04.83-1.88 1.87-1.88s1.87.84 1.87 1.88-.84 1.88-1.87 1.88-1.87-.84-1.87-1.88z"/></svg>
+);
+
+export const LinkIcon: React.FC<{className?: string}> = ({className}) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className || smallIconBaseClass}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"/></svg>
+);
+
+export const BlueskyIcon: React.FC<{className?: string}> = ({className}) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className || smallIconBaseClass}><path d="M12 1.145C5.99 1.145 1.145 5.99 1.145 12S5.99 22.855 12 22.855 22.855 18.01 22.855 12 18.01 1.145 12 1.145zm6.54 10.966c.012.13.018.262.018.393 0 3.99-3.033 8.58-8.58 8.58-1.697 0-3.28-.497-4.61-1.352.235.027.473.04.713.04 1.408 0 2.705-.48 3.73-1.288-1.314-.024-2.422-.89-2.805-2.08.183.035.37.053.562.053.272 0 .538-.036.79-.1-1.373-.277-2.408-1.49-2.408-2.94v-.037c.404.225.865.36 1.352.373-1.21-1.07-1.53-2.5-1.53-3.83 0-.84.226-1.62.62-2.28 1.48 1.815 3.68 3.008 6.13 3.106-.05-.22-.078-.45-.078-.688 0-1.658 1.34-3 3-3 .863 0 1.643.364 2.19 .95.684-.135 1.326-.384 1.903-.728-.224.7-.7 1.29-1.32 1.66.608-.073 1.19-.234 1.72-.47-.403.6-.9 1.12-1.46 1.54z"></path></svg>
+);
+
+export const TumblrIcon: React.FC<{className?: string}> = ({className}) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className={className || smallIconBaseClass}><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.468H14.9V9.747h5.43v4.257h-5.43v4.403c0 2.243 1.401 3.443 3.245 3.443.502 0 1.156-.12 1.512-.294l1.323 3.93c-.633.294-1.92.5-3.345.5z"></path></svg>
 );

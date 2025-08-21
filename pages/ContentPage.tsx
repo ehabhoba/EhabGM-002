@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { PAGES_DATA } from '../constants';
@@ -28,6 +27,7 @@ const ContentPage: React.FC = () => {
       <PageMetadata 
         title={meta.title}
         description={meta.description}
+        keywords={meta.keywords}
       />
       <div className="animate-fade-in">
         {/* Hero Section */}

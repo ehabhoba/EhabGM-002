@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CONTACT_DETAILS, ALL_SERVICES_LIST } from '../constants';
+import { CONTACT_DETAILS, ALL_SERVICES_LIST, CONTACT_PAGE_META } from '../constants';
 import PageMetadata from '../components/PageMetadata';
 
 const ContactPage: React.FC = () => {
@@ -34,8 +34,9 @@ const ContactPage: React.FC = () => {
   return (
     <>
     <PageMetadata 
-      title="تواصل معنا | اطلب عرض سعر أو استشارة مجانية"
-      description="هل أنت جاهز لبدء مشروعك؟ تواصل معنا الآن للحصول على استشارة مجانية أو عرض سعر فوري. فريقنا في انتظارك لمساعدتك على تحقيق أهدافك."
+      title={CONTACT_PAGE_META.title}
+      description={CONTACT_PAGE_META.description}
+      keywords={CONTACT_PAGE_META.keywords}
     />
     <div className="animate-fade-in">
       {/* Page Header */}
