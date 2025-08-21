@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { FAQ_ITEMS } from '../constants';
 import { PlusIcon, MinusIcon } from '../components/IconComponents';
+import PageMetadata from '../components/PageMetadata';
 
 const AccordionItem: React.FC<{ item: { question: string; answer: string; }, isOpen: boolean, onClick: () => void }> = ({ item, isOpen, onClick }) => {
   return (
@@ -36,6 +37,11 @@ const FAQPage: React.FC = () => {
   };
 
   return (
+    <>
+    <PageMetadata 
+      title="الأسئلة الشائعة | كل ما تريد معرفته عن خدماتنا"
+      description="أجوبة لأكثر الأسئلة التي تصلنا حول طرق الدفع، مدة تنفيذ المشاريع، سياسة التعديلات، وغيرها. إذا لم تجد سؤالك، لا تتردد في التواصل معنا."
+    />
     <div className="animate-fade-in">
       {/* Page Header */}
       <section className="bg-white py-12">
@@ -63,6 +69,7 @@ const FAQPage: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

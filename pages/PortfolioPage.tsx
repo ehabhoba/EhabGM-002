@@ -1,7 +1,9 @@
+
 import React, { useState, useMemo } from 'react';
 import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES } from '../constants';
 import { XIcon } from '../components/IconComponents';
 import { PortfolioItem } from '../types';
+import PageMetadata from '../components/PageMetadata';
 
 const PortfolioPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('الكل');
@@ -15,13 +17,18 @@ const PortfolioPage: React.FC = () => {
   }, [activeCategory]);
 
   return (
+    <>
+    <PageMetadata 
+      title="معرض الأعمال | مشاريعنا السابقة في التسويق والتصميم"
+      description="تصفح أعمالنا المميزة في التسويق الرقمي، تطوير المواقع، والمتاجر الإلكترونية. اكتشف كيف ساعدنا عملاءنا على تحقيق نتائج استثنائية."
+    />
     <div className="animate-fade-in">
       {/* Page Header */}
       <section className="bg-white py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">معرض أعمالنا</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">أعمالنا المميزة</h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-            نقدم لكم مجموعة مختارة من مشاريعنا التي تعكس شغفنا بالإبداع والتزامنا بالجودة والاحترافية.
+            مشاريع نفخر بإنجازها. اكتشف كيف ساعدنا عملاءنا في تحقيق نتائج استثنائية وزيادة أرباحهم.
           </p>
         </div>
       </section>
@@ -80,7 +87,7 @@ const PortfolioPage: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative">
-              <img src={selectedItem.imageUrl} alt={selectedItem.title} className="w-full h-auto max-h-[70vh] object-contain rounded-t-lg" />
+              <img src={selectedItem.imageUrl} alt={selectedItem.title} className="w-full h-auto max-h-[60vh] object-cover rounded-t-lg" />
               <button
                 onClick={() => setSelectedItem(null)}
                 className="absolute top-4 right-4 bg-white/50 p-2 rounded-full text-gray-800 hover:bg-white transition"
@@ -90,13 +97,26 @@ const PortfolioPage: React.FC = () => {
             </div>
             <div className="p-6">
               <h2 className="text-2xl font-bold text-gray-900">{selectedItem.title}</h2>
-              <p className="mt-2 text-sm font-semibold text-indigo-600">{selectedItem.category}</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {selectedItem.tags.map(tag => (
+                  <span key={tag} className="text-xs font-semibold bg-gray-200 text-gray-700 px-2 py-1 rounded">{tag}</span>
+                ))}
+              </div>
               <p className="mt-4 text-gray-600">{selectedItem.description}</p>
+              <div className="mt-6 grid grid-cols-3 gap-4 text-center border-t border-gray-200 pt-4">
+                {selectedItem.stats.map(stat => (
+                    <div key={stat.label}>
+                        <p className="text-2xl font-bold text-indigo-600">{stat.value}</p>
+                        <p className="mt-1 text-sm text-gray-500">{stat.label}</p>
+                    </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       )}
     </div>
+    </>
   );
 };
 

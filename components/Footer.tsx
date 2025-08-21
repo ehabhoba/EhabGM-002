@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NAV_LINKS, SOCIAL_LINKS } from '../constants';
+import { SOCIAL_LINKS, SERVICES } from '../constants';
 
 const Footer: React.FC = () => {
   return (
@@ -12,16 +12,16 @@ const Footer: React.FC = () => {
               EhabGM<span className="text-gray-700">.</span>
             </Link>
             <p className="mt-4 text-gray-500 text-sm">
-              شريكك الرقمي المتكامل للنجاح. نقدم حلولاً إبداعية لعلامتك التجارية.
+              وكالة تسويق رقمي متخصصة في حلوان، القاهرة. نساعد الشركات على النمو والنجاح عبر الإنترنت.
             </p>
           </div>
           <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold text-gray-800">روابط سريعة</h3>
+            <h3 className="text-lg font-semibold text-gray-800">خدماتنا</h3>
             <ul className="mt-4 space-y-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.name}>
-                  <Link to={link.path} className="text-gray-500 hover:text-indigo-600 transition-colors text-sm">
-                    {link.name}
+              {SERVICES.map((service) => (
+                <li key={service.title}>
+                  <Link to={service.link} className="text-gray-500 hover:text-indigo-600 transition-colors text-sm">
+                    {service.title}
                   </Link>
                 </li>
               ))}
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-800">تواصل معنا</h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li><a href="tel:+201022679250" className="text-gray-500 hover:text-indigo-600 transition-colors">01022679250</a></li>
-              <li><a href="mailto:contact@ehabgm.online" className="text-gray-500 hover:text-indigo-600 transition-colors">contact@ehabgm.online</a></li>
+              <li><a href="mailto:info@ehabgm.online" className="text-gray-500 hover:text-indigo-600 transition-colors">info@ehabgm.online</a></li>
               <li><p className="text-gray-500">حلوان، القاهرة، مصر</p></li>
             </ul>
           </div>
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 border-t border-gray-200 pt-4 text-center text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} جميع الحقوق محفوظة لـ EhabGM Online Services.</p>
+          <p>&copy; {new Date().getFullYear()} جميع الحقوق محفوظة لـ EhabGM.</p>
         </div>
       </div>
     </footer>
