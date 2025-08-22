@@ -4,6 +4,19 @@ import { PAGES_DATA, PORTFOLIO_ITEMS, BLOG_POSTS } from '../constants';
 import { CheckCircleIcon, PlusIcon, MinusIcon } from '../components/IconComponents';
 import PageMetadata from '../components/PageMetadata';
 import type { PortfolioItem, BlogPost } from '../types';
+import { motion, Variants } from 'framer-motion';
+
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
 
 const AccordionItem: React.FC<{ item: { question: string; answer: string; }, isOpen: boolean, onClick: () => void }> = ({ item, isOpen, onClick }) => {
   return (
@@ -112,7 +125,7 @@ const ContentPage: React.FC = () => {
         keywords={meta.keywords}
         schema={[serviceSchema, breadcrumbSchema]}
       />
-      <div className="animate-fade-in">
+      <div className="overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative bg-gray-800 text-white py-20 md:py-32">
           <div className="absolute inset-0">
@@ -120,13 +133,33 @@ const ContentPage: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
           </div>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">{title}</h1>
-            <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-300">{description}</p>
+            <motion.h1 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl md:text-5xl font-extrabold leading-tight"
+            >
+              {title}
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mt-4 max-w-3xl mx-auto text-lg text-gray-300"
+            >
+              {description}
+            </motion.p>
           </div>
         </section>
         
         {/* Features Section */}
-        <section className="py-16 bg-white dark:bg-gray-900">
+        <motion.section 
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="py-16 bg-white dark:bg-gray-900"
+        >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-10">{features.title}</h2>
@@ -144,11 +177,17 @@ const ContentPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Why Choose Us Section */}
         {whyChooseUs && (
-            <section className="py-16 bg-gray-50 dark:bg-gray-800">
+            <motion.section 
+              variants={sectionVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="py-16 bg-gray-50 dark:bg-gray-800"
+            >
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{whyChooseUs.title}</h2>
@@ -163,12 +202,18 @@ const ContentPage: React.FC = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </motion.section>
         )}
         
         {/* Process Section */}
         {process && (
-             <section className="py-16 bg-white dark:bg-gray-900">
+             <motion.section 
+                variants={sectionVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                className="py-16 bg-white dark:bg-gray-900"
+              >
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{process.title}</h2>
@@ -187,12 +232,18 @@ const ContentPage: React.FC = () => {
                     ))}
                 </div>
                 </div>
-            </section>
+            </motion.section>
         )}
 
         {/* Related Portfolio & FAQ Section */}
         {(relatedPortfolioItem || faq) && (
-            <section className="py-16 bg-gray-50 dark:bg-gray-800">
+            <motion.section 
+              variants={sectionVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="py-16 bg-gray-50 dark:bg-gray-800"
+            >
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                        {/* Related Portfolio */}
@@ -229,12 +280,18 @@ const ContentPage: React.FC = () => {
                         )}
                     </div>
                 </div>
-            </section>
+            </motion.section>
         )}
 
         {/* Related Services & Posts */}
         {(relatedServices.length > 0 || relatedPosts.length > 0) && (
-            <section className="py-16 bg-white dark:bg-gray-900">
+            <motion.section 
+              variants={sectionVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="py-16 bg-white dark:bg-gray-900"
+            >
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
                          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">اكتشف المزيد</h2>
@@ -266,7 +323,7 @@ const ContentPage: React.FC = () => {
                         )}
                     </div>
                 </div>
-            </section>
+            </motion.section>
         )}
 
 

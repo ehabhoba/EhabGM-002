@@ -18,6 +18,9 @@ export interface PortfolioItem {
   stats?: { value: string; label: string }[];
   tags?: string[];
   serviceSlug?: string; // Links portfolio item to a service page
+  client?: string;
+  website?: string;
+  relatedPostsSlugs?: string[];
 }
 
 export interface SocialLink {

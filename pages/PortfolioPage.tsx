@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES, PORTFOLIO_PAGE_META } from '../constants';
-import { XIcon } from '../components/IconComponents';
-import { PortfolioItem } from '../types';
+import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES, PORTFOLIO_PAGE_META, BLOG_POSTS } from '../constants';
+import { XIcon, LinkIcon } from '../components/IconComponents';
+import { PortfolioItem, BlogPost } from '../types';
 import PageMetadata from '../components/PageMetadata';
 
 const PortfolioPage: React.FC = () => {
@@ -15,6 +15,14 @@ const PortfolioPage: React.FC = () => {
     }
     return PORTFOLIO_ITEMS.filter(item => item.category === activeCategory);
   }, [activeCategory]);
+
+  const relatedPosts = useMemo(() => {
+    if (!selectedItem || !selectedItem.relatedPostsSlugs) return [];
+    return selectedItem.relatedPostsSlugs
+      .map(slug => BLOG_POSTS.find(p => p.slug === slug))
+      .filter((p): p is BlogPost => !!p);
+  }, [selectedItem]);
+
 
   return (
     <>
@@ -88,7 +96,7 @@ const PortfolioPage: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative">
-              <img src={selectedItem.image_url} alt={selectedItem.title} className="w-full h-auto max-h-[50vh] object-cover rounded-t-lg" />
+              <img src={selectedItem.image_url} alt={selectedItem.title} className="w-full h-auto max-h-[45vh] object-cover rounded-t-lg" />
               <button
                 onClick={() => setSelectedItem(null)}
                 className="absolute top-4 right-4 bg-white/50 dark:bg-gray-900/50 p-2 rounded-full text-gray-800 dark:text-gray-100 hover:bg-white dark:hover:bg-gray-900 transition"
@@ -98,12 +106,25 @@ const PortfolioPage: React.FC = () => {
             </div>
             <div className="p-6 overflow-y-auto">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{selectedItem.title}</h2>
-              <div className="flex flex-wrap gap-2 mt-2">
+              {selectedItem.client && (
+                <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  <span className="font-semibold ml-2">العميل:</span>
+                  <span>{selectedItem.client}</span>
+                  {selectedItem.website && (
+                    <a href={selectedItem.website} target="_blank" rel="noopener noreferrer" className="mr-4 flex items-center text-indigo-600 dark:text-indigo-400 hover:underline">
+                      <LinkIcon className="h-4 w-4 ml-1" />
+                      زيارة الموقع
+                    </a>
+                  )}
+                </div>
+              )}
+              <div className="flex flex-wrap gap-2 mt-4">
                 {selectedItem.tags?.map(tag => (
-                  <span key={tag} className="text-xs font-semibold bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded">{tag}</span>
+                  <span key={tag} className="text-xs font-semibold bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-2 py-1 rounded-full">{tag}</span>
                 ))}
               </div>
               <p className="mt-4 text-gray-600 dark:text-gray-300">{selectedItem.description}</p>
+              
               {selectedItem.stats && selectedItem.stats.length > 0 && (
                 <div className="mt-6 grid grid-cols-3 gap-4 text-center border-t border-gray-200 dark:border-gray-700 pt-4">
                   {selectedItem.stats.map(stat => (
@@ -114,15 +135,36 @@ const PortfolioPage: React.FC = () => {
                   ))}
                 </div>
               )}
-               {selectedItem.serviceSlug && (
-                <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
-                  <Link 
-                    to={`/page/${selectedItem.serviceSlug}`} 
-                    onClick={() => setSelectedItem(null)}
-                    className="inline-block w-full text-center py-3 px-6 rounded-lg font-semibold transition-colors bg-indigo-100 text-indigo-700 hover:bg-indigo-200 dark:bg-indigo-900/50 dark:text-indigo-300 dark:hover:bg-indigo-900/80"
-                  >
-                    اكتشف الخدمة المقدمة
-                  </Link>
+              
+              {(selectedItem.serviceSlug || relatedPosts.length > 0) && (
+                <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4 space-y-4">
+                  {selectedItem.serviceSlug && (
+                    <Link 
+                      to={`/page/${selectedItem.serviceSlug}`} 
+                      onClick={() => setSelectedItem(null)}
+                      className="block w-full text-center py-3 px-6 rounded-lg font-semibold transition-colors bg-indigo-100 text-indigo-700 hover:bg-indigo-200 dark:bg-indigo-900/50 dark:text-indigo-300 dark:hover:bg-indigo-900/80"
+                    >
+                      اكتشف الخدمة المقدمة
+                    </Link>
+                  )}
+                  {relatedPosts.length > 0 && (
+                    <div>
+                        <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">مقالات ذات صلة:</h4>
+                        <ul className="space-y-2">
+                            {relatedPosts.map(post => (
+                                <li key={post.slug}>
+                                    <Link 
+                                      to={`/blog/${post.slug}`} 
+                                      onClick={() => setSelectedItem(null)}
+                                      className="text-indigo-600 dark:text-indigo-400 hover:underline text-sm"
+                                    >
+                                      {post.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
